@@ -10,6 +10,8 @@ import {
     useEffect,
 } from "react";
 
+import styles from "./App.module.css";
+
 const title: JSX.Element = <h1>Welcome to TODO app</h1>;
 const reactElement: ReactElement = <h1>Same react element</h1>;
 
@@ -109,7 +111,7 @@ function App() {
     };
     return (
         <>
-            {title}
+            <div className={styles["text-center"]}>{title}</div>
             {reactElement}
             <HeadLine id={1}>Hello Children</HeadLine>
             <HeadLine1 id={2}>Same component</HeadLine1>
