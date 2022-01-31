@@ -9,6 +9,7 @@ import {
     useState,
     useEffect,
 } from "react";
+import { TodoForm } from '../src/components/integration'
 
 const title: JSX.Element = <h1>Welcome to TODO app</h1>;
 const reactElement: ReactElement = <h1>Same react element</h1>;
@@ -110,7 +111,8 @@ function App() {
     return (
         <>
             {title}
-            {reactElement}
+            <TodoForm />
+            {/* {reactElement}
             <HeadLine id={1}>Hello Children</HeadLine>
             <HeadLine1 id={2}>Same component</HeadLine1>
             <br />
@@ -118,7 +120,7 @@ function App() {
             <br />
             <div onClick={onClickHandler}>{count}</div>
             <br />
-            <Hooks />
+            <Hooks /> */}
         </>
     );
 }
