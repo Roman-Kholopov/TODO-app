@@ -11,6 +11,8 @@ import {
 } from "react";
 import { TodoForm } from '../src/components/integration'
 
+import styles from "./App.module.css";
+
 const title: JSX.Element = <h1>Welcome to TODO app</h1>;
 const reactElement: ReactElement = <h1>Same react element</h1>;
 
@@ -113,6 +115,8 @@ function App() {
             {title}
             <TodoForm />
             {/* {reactElement}
+            <div className={styles["text-center"]}>{title}</div>
+            {reactElement}
             <HeadLine id={1}>Hello Children</HeadLine>
             <HeadLine1 id={2}>Same component</HeadLine1>
             <br />
