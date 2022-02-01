@@ -10,7 +10,7 @@ export function TodoForm(props) {
     }
 
     const onChangeHandler = (e) => {
-        console.log(e.target.value)
+        setTodoName(e.target.value)
     }
 
     return <ToDoForm 
@@ -21,7 +21,3 @@ export function TodoForm(props) {
                 buttonType="button"
             />
 }
-
-
-// *2 - Сделать интеграционный компонент*
-// сделать компонент который будет прокидывать нужные пропсы в (тупой) компонент формы
