@@ -9,7 +9,7 @@ import {
     useState,
     useEffect,
 } from "react";
-
+import { TodoForm } from '../src/components/integration'
 
 import styles from "./App.module.css";
 
@@ -112,6 +112,9 @@ function App() {
     };
     return (
         <>
+            {title}
+            <TodoForm />
+            {/* {reactElement}
             <div className={styles["text-center"]}>{title}</div>
             {reactElement}
             <HeadLine id={1}>Hello Children</HeadLine>
@@ -121,7 +124,7 @@ function App() {
             <br />
             <div onClick={onClickHandler}>{count}</div>
             <br />
-            <Hooks />
+            <Hooks /> */}
         </>
     );
 }
