@@ -1,5 +1,5 @@
 import { IQueryStringParcer } from '../../../interfaces/QueryStringParcer'
-import { IHttpTransport, IHttpTransportParams } from '../../../interfaces/HttpTransport'
+import { IHttpTransport, IHttpTransportParams, IHttpTransportResponse } from '../../../interfaces/HttpTransport'
 import { QueryStringParser } from '../../parsers/QueryStringParser'
 
 export class HttpTransport implements IHttpTransport {
@@ -12,11 +12,11 @@ export class HttpTransport implements IHttpTransport {
         this.serializer = new QueryStringParser();
     }
 
-    get(params: IHttpTransportParams) {
+    async get(params: IHttpTransportParams): Promise<IHttpTransportResponse> {
         throw new Error("Method 'get' should be implemented")
     }
 
-    post(params: IHttpTransportParams) {
+    async post(params: IHttpTransportParams): Promise<IHttpTransportResponse> {
         throw new Error("Method 'post' should be implemented")
     }
 }
@@ -29,7 +29,7 @@ export class AxiosTransport extends HttpTransport {
         super(client)
     }
 
-    async get(params: IHttpTransportParams) {
+    async get(params: IHttpTransportParams): Promise<IHttpTransportResponse> {
         const { bodyParams, path, queryParams } = params
         const updatedPath = queryParams
             ? `path?${(this.serializer.getQueryStringFromObject(queryParams))}`
@@ -37,7 +37,7 @@ export class AxiosTransport extends HttpTransport {
         return await this.client.get(updatedPath, bodyParams);
     }
 
-    async post(params: IHttpTransportParams) {
+    async post(params: IHttpTransportParams): Promise<IHttpTransportResponse> {
         const { bodyParams, path, queryParams } = params
         const updatedPath = queryParams
             ? `path?${(this.serializer.getQueryStringFromObject(queryParams))}`

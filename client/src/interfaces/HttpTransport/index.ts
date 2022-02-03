@@ -8,11 +8,20 @@ interface IObject {
 
 export interface IHttpTransportParams {
     path: string
-    bodyParams: IDeepObject
-    queryParams: IObject
+    bodyParams?: IDeepObject
+    queryParams?: IObject
+}
+
+export interface IHttpTransportResponse {
+    data: IDeepObject | any
+    status: number
+    statusText: string
+    headers: IObject
+    config: IDeepObject
+    request: IDeepObject
 }
 
 export interface IHttpTransport {
-    get(params: IHttpTransportParams): any
-    post(params: IHttpTransportParams): any
+    get(params: IHttpTransportParams): Promise<IHttpTransportResponse>
+    post(params: IHttpTransportParams): Promise<IHttpTransportResponse>
 }

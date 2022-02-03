@@ -1,4 +1,4 @@
-import { IHttpTransport, IHttpTransportParams } from '../../interfaces/HttpTransport'
+import { IHttpTransport, IHttpTransportParams, IHttpTransportResponse } from '../../interfaces/HttpTransport'
 import { AxiosTransport } from '../../modules/transports/HttpTransport'
 
 // get from .env
@@ -20,7 +20,7 @@ export class NetworService {
         this._transport = transport;
     }
 
-    async send(params: ISendParams) {
+    async send(params: ISendParams): Promise<IHttpTransportResponse> {
         const { path, queryParams, bodyParams, method } = params
         return await this._transport[method]({ path, queryParams, bodyParams });
     }
