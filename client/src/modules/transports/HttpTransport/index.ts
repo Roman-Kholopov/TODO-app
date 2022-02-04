@@ -12,12 +12,20 @@ export class HttpTransport implements IHttpTransport {
         this.serializer = new QueryStringParser();
     }
 
-    async get(params: IHttpTransportParams): Promise<IHttpTransportResponse> {
+    async get(param: Omit<IHttpTransportParams, 'method'>): Promise<IHttpTransportResponse> {
         throw new Error("Method 'get' should be implemented")
     }
 
-    async post(params: IHttpTransportParams): Promise<IHttpTransportResponse> {
+    async post(param: Omit<IHttpTransportParams, 'method'>): Promise<IHttpTransportResponse> {
         throw new Error("Method 'post' should be implemented")
+    }
+
+    async delete(param: Omit<IHttpTransportParams, 'method'>): Promise<IHttpTransportResponse> {
+        throw new Error("Method 'delete' should be implemented")
+    }
+
+    async patch(param: Omit<IHttpTransportParams, 'method'>): Promise<IHttpTransportResponse> {
+        throw new Error("Method 'patch' should be implemented")
     }
 }
 
@@ -29,19 +37,35 @@ export class AxiosTransport extends HttpTransport {
         super(client)
     }
 
-    async get(params: IHttpTransportParams): Promise<IHttpTransportResponse> {
-        const { bodyParams, path, queryParams } = params
-        const updatedPath = queryParams
-            ? `path?${(this.serializer.getQueryStringFromObject(queryParams))}`
-            : path;
-        return await this.client.get(updatedPath, bodyParams);
+    async get(param: Omit<IHttpTransportParams, 'method'>): Promise<IHttpTransportResponse> {
+        const { url, params, ...rest } = param
+        const updatedPath = params
+            ? `path?${(this.serializer.getQueryStringFromObject(params))}`
+            : url;
+        return await this.client.get(updatedPath, rest);
     }
 
-    async post(params: IHttpTransportParams): Promise<IHttpTransportResponse> {
-        const { bodyParams, path, queryParams } = params
-        const updatedPath = queryParams
-            ? `path?${(this.serializer.getQueryStringFromObject(queryParams))}`
-            : path;
-        return await this.client.post(updatedPath, bodyParams);
+    async post(param: Omit<IHttpTransportParams, 'method'>): Promise<IHttpTransportResponse> {
+        const { url, params, ...rest } = param
+        const updatedPath = params
+            ? `path?${(this.serializer.getQueryStringFromObject(params))}`
+            : url;
+        return await this.client.post(updatedPath, rest);
+    }
+
+    async delete(param: Omit<IHttpTransportParams, 'method'>): Promise<IHttpTransportResponse> {
+        const { url, params, ...rest } = param
+        const updatedPath = params
+            ? `path?${(this.serializer.getQueryStringFromObject(params))}`
+            : url;
+        return await this.client.delete(updatedPath, rest);
+    }
+
+    async patch(param: Omit<IHttpTransportParams, 'method'>): Promise<IHttpTransportResponse> {
+        const { url, params, ...rest } = param
+        const updatedPath = params
+            ? `path?${(this.serializer.getQueryStringFromObject(params))}`
+            : url;
+        return await this.client.patch(updatedPath, rest);
     }
 }

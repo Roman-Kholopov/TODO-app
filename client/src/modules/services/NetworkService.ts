@@ -9,10 +9,6 @@ const axios = {
     }
 }
 
-interface ISendParams extends IHttpTransportParams {
-    method: 'get' | 'post'
-}
-
 export class NetworService {
     private readonly _transport: IHttpTransport
 
@@ -20,9 +16,9 @@ export class NetworService {
         this._transport = transport;
     }
 
-    async send(params: ISendParams): Promise<IHttpTransportResponse> {
-        const { path, queryParams, bodyParams, method } = params
-        return await this._transport[method]({ path, queryParams, bodyParams });
+    async send(params: IHttpTransportParams): Promise<IHttpTransportResponse> {
+        const { method, ...rest } = params
+        return await this._transport[method](rest);
     }
 }
 
