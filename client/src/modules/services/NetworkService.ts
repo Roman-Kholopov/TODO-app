@@ -17,8 +17,10 @@ export class NetworService {
     }
 
     async send(params: IHttpTransportParams): Promise<IHttpTransportResponse> {
-        const { method, ...rest } = params
-        return await this._transport[method](rest);
+        // Live it as reference
+        // const { method, ...rest } = params
+        // return await this._transport[method](rest);
+        return await this._transport.process(params);
     }
 }
 

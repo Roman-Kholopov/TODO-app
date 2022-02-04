@@ -27,6 +27,10 @@ export class HttpTransport implements IHttpTransport {
     async patch(param: Omit<IHttpTransportParams, 'method'>): Promise<IHttpTransportResponse> {
         throw new Error("Method 'patch' should be implemented")
     }
+
+    async process(param: IHttpTransportParams): Promise<IHttpTransportResponse> {
+        throw new Error("Method 'process' should be implemented")
+    }
 }
 
 export class AxiosTransport extends HttpTransport {
@@ -35,6 +39,13 @@ export class AxiosTransport extends HttpTransport {
 
     constructor(client: any) {
         super(client)
+    }
+
+    async process(param: IHttpTransportParams): Promise<IHttpTransportResponse> {
+        return await this.client({
+            ...param, 
+            paramsSerializer: this.serializer.getQueryStringFromObject
+        })
     }
 
     async get(param: Omit<IHttpTransportParams, 'method'>): Promise<IHttpTransportResponse> {

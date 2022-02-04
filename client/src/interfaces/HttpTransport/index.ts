@@ -46,4 +46,5 @@ export interface IHttpTransport {
     post(param: Omit<IHttpTransportParams, 'method'>): Promise<IHttpTransportResponse>
     delete(param: Omit<IHttpTransportParams, 'method'>): Promise<IHttpTransportResponse>
     patch(param: Omit<IHttpTransportParams, 'method'>): Promise<IHttpTransportResponse>
+    process(param: IHttpTransportParams): Promise<IHttpTransportResponse>
 }
