@@ -9,9 +9,10 @@ import {
     useState,
     useEffect,
 } from "react";
-
+import { TodoForm } from '../src/components/integration'
 
 import styles from "./App.module.css";
+import styled from 'styled-components'
 
 const title: JSX.Element = <h1>Welcome to TODO app</h1>;
 const reactElement: ReactElement = <h1>Same react element</h1>;
@@ -103,6 +104,7 @@ const Hooks = () => {
 
 function App() {
     const [count, setCount] = useState<number>(0);
+    const [isCoral, setIsCoral] = useState<boolean>(false);
 
     const onClickHandler: ReactEventHandler = (e) => {
         console.log(e);
@@ -110,9 +112,14 @@ function App() {
             return prevState + 1;
         });
     };
+
     return (
         <>
             <div className={styles["text-center"]}>{title}</div>
+            <TodoForm />
+            <br />
+            <Button isCoral={isCoral} onClick={() => setIsCoral(!isCoral)}>Click to change me</Button>
+            {/* {reactElement}
             {reactElement}
             <HeadLine id={1}>Hello Children</HeadLine>
             <HeadLine1 id={2}>Same component</HeadLine1>
@@ -121,9 +128,14 @@ function App() {
             <br />
             <div onClick={onClickHandler}>{count}</div>
             <br />
-            <Hooks />
+            <Hooks /> */}
         </>
     );
 }
+
+const Button = styled.button<{ isCoral: boolean }>`
+    background-color: ${({ isCoral }) => isCoral && 'coral'};
+    color: ${({ isCoral }) => isCoral && 'white'};
+`
 
 export default App;
