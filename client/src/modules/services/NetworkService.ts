@@ -42,10 +42,10 @@ class Todo extends NetworkService {
     super(axiosTransport);
   }
 
-  async get() {
-    //... тут надо что-то сделать
+  async getTodo() {
+
     try {
-      super.send(axiosTransport.client).then((response) => {
+      return await  this.send({method:'get',url:'/api/getTodo'}).then((response) => {
         return response.data;
       });
     } catch (error) {
@@ -53,12 +53,9 @@ class Todo extends NetworkService {
     }
   }
 
-  async getList() {
-    //...тут надо что-то сделать
+  async getTodoList() {
     try {
-      super.send(axiosTransport.client).then((response) => {
-        return response;
-      });
+      return await this.send({method:'get',url:'/api/getTodo'})
     } catch (error) {
       return [];
     }
